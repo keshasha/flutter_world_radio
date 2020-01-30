@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_radio/flutter_radio.dart';
-import 'package:volume/volume.dart';
+//import 'package:volume/volume.dart';
 
 class Player extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _PlayerState extends State<Player> {
   Future<List> urls;
   int currentIndex;
 
-  int maxVol, currentVol;
+//  int maxVol, currentVol;
 
   ScrollController scrollController = ScrollController();
 
@@ -24,7 +24,7 @@ class _PlayerState extends State<Player> {
   void initState() {
     super.initState();
     isPlaying = false;
-    initPlatformState();
+//    initPlatformState();
     audioStart();
   }
 
@@ -34,22 +34,22 @@ class _PlayerState extends State<Player> {
     super.dispose();
   }
 
-  Future<void> initPlatformState() async {
-    // pass any stream as parameter as per requirement
-    await Volume.controlVolume(AudioManager.STREAM_MUSIC);
-  }
+//  Future<void> initPlatformState() async {
+//    // pass any stream as parameter as per requirement
+//    await Volume.controlVolume(AudioManager.STREAM_MUSIC);
+//  }
 
-  updateVolumes() async {
-    // get Max Volume
-    maxVol = await Volume.getMaxVol;
-    // get Current Volume
-    currentVol = await Volume.getVol;
-    setState(() {});
-  }
-
-  setVol(int i) async {
-    await Volume.setVol(i);
-  }
+//  updateVolumes() async {
+//    // get Max Volume
+//    maxVol = await Volume.getMaxVol;
+//    // get Current Volume
+//    currentVol = await Volume.getVol;
+//    setState(() {});
+//  }
+//
+//  setVol(int i) async {
+//    await Volume.setVol(i);
+//  }
 
   Future<void> audioStart() async {
     urls = loadJsonUrls();
@@ -94,15 +94,20 @@ class _PlayerState extends State<Player> {
                                 FlutterRadio.play(url: url);
                                 isPlaying = true;
                               },
-                              child: Card(
-                                color: currentIndex == index
-                                    ? Colors.indigo.shade300
-                                    : Colors.indigo,
-                                child: ListTile(
-                                  title: Text(
-                                    "${urls[index]["name"]}",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),
+                              child: SizedBox(
+                                child: Card(
+                                  color: currentIndex == index
+                                      ? Colors.indigo.shade300
+                                      : Colors.indigo,
+                                  child: ListTile(
+                                    leading: currentIndex == index
+                                        ? Image.asset('assets/loader.gif')
+                                        : null,
+                                    title: Text(
+                                      "${urls[index]["name"]}",
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -132,7 +137,7 @@ class _PlayerState extends State<Player> {
                             url = urlList[currentIndex]["url"];
                             scrollController.animateTo(
                                 currentIndex.toDouble() * 50,
-                                duration: Duration(seconds: 1),
+                                duration: Duration(milliseconds: 500),
                                 curve: Curves.ease);
                             FlutterRadio.stop();
                             FlutterRadio.play(url: url);
@@ -176,7 +181,7 @@ class _PlayerState extends State<Player> {
                             url = urlList[currentIndex]["url"];
                             scrollController.animateTo(
                                 currentIndex.toDouble() * 50,
-                                duration: Duration(seconds: 1),
+                                duration: Duration(milliseconds: 500),
                                 curve: Curves.ease);
                             FlutterRadio.stop();
                             FlutterRadio.play(url: url);
@@ -190,18 +195,32 @@ class _PlayerState extends State<Player> {
             ),
             Expanded(
               flex: 1,
-              child: Slider(
-                activeColor: Colors.indigoAccent,
-                min: 0.0,
-                max: 15.0,
-                onChanged: (newRating) async {
-                  setState(() {
-                    _sliderValue = newRating;
-                  });
-                  await setVol(newRating.toInt());
-                  await updateVolumes();
-                },
-                value: _sliderValue,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                          onTap: () {},
+                          child: Icon(Icons.volume_up,
+                              size: 30, color: Colors.white))),
+                  Expanded(
+                    flex: 6,
+                    child: Slider(
+                      activeColor: Colors.indigoAccent,
+                      min: 0.0,
+                      max: 5.0,
+                      onChanged: (newRating) async {
+                        setState(() {
+                          _sliderValue = newRating;
+                        });
+                        await FlutterRadio.setVolume(newRating);
+//                        await setVol(newRating.toInt());
+//                        await updateVolumes();
+                      },
+                      value: _sliderValue,
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:world_radio/view/player.dart';
+import 'package:world_radio/view/test_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         backgroundColor: Theme.of(context).primaryColor,
       ),
+
       body: Player()
     );
   }
