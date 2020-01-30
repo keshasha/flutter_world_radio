@@ -208,7 +208,7 @@ class _PlayerState extends State<Player> {
                     child: Slider(
                       activeColor: Colors.indigoAccent,
                       min: 0.0,
-                      max: 5.0,
+                      max: 1.0,
                       onChanged: (newRating) async {
                         setState(() {
                           _sliderValue = newRating;

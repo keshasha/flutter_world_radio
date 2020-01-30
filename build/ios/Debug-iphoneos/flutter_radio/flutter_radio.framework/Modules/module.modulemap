@@ -1,0 +1,6 @@
+framework module flutter_radio {
+  umbrella header "flutter_radio-umbrella.h"
+
+  export *
+  module * { export * }
+}
