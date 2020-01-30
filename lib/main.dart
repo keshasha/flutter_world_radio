@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
       title: 'World Radio App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        primaryColor: Colors.indigo
       ),
       home: MyHomePage(title: 'World Radio'),
     );
@@ -32,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Player()
     );

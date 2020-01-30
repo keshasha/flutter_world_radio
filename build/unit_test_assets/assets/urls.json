@@ -1,0 +1,34 @@
+[
+  {
+    "name": "ANTENA1 | 94,7 FM",
+    "url": "http://52.67.104.223:8232/stream/1"
+  },
+  {
+    "name": "Hitradio OE3",
+    "url": "http://185.85.28.166:8000"
+  },
+  {
+    "name": "AlienWare",
+    "url": "http://185.132.179.131:9902/stream"
+  },
+  {
+    "name": "Alex Jones - Infowars.com",
+    "url": "http://50.7.69.18:80/alexjonesshow"
+  },
+  {
+    "name": "Radio 2.0 - Valli di Bergamo HD",
+    "url": "http://46.252.154.133:8000/stream.ogg"
+  },
+  {
+    "name": "Dance Wave!",
+    "url": "http://78.31.65.20:8080/dance.mp3"
+  },
+  {
+    "name": "Radio FM4",
+    "url": "http://185.85.29.141:8000"
+  },
+  {
+    "name": "KPOP TOP 100",
+    "url": "http://121.159.140.57:8000/128"
+  }
+]
